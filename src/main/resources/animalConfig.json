@@ -1,0 +1,164 @@
+{
+  "rows": [
+    {
+      "animalName": "wolf",
+      "parameters": {
+        "weight": 50,
+        "maxCellPopulation": 30,
+        "speed": 3,
+        "maxSaturation": 8,
+        "offspring": 13
+      }
+    },
+    {
+      "animalName": "snake",
+      "parameters": {
+        "weight": 15,
+        "maxCellPopulation": 30,
+        "speed": 1,
+        "maxSaturation": 3,
+        "offspring": 100
+      }
+    },
+    {
+      "animalName": "fox",
+      "parameters": {
+        "weight": 8,
+        "maxCellPopulation": 30,
+        "speed": 2,
+        "maxSaturation": 2,
+        "offspring": 13
+      }
+    },
+    {
+      "animalName": "bear",
+      "parameters": {
+        "weight": 500,
+        "maxCellPopulation": 5,
+        "speed": 2,
+        "maxSaturation": 80,
+        "offspring": 5
+      }
+    },
+    {
+      "animalName": "eagle",
+      "parameters": {
+        "weight": 6,
+        "maxCellPopulation": 20,
+        "speed": 3,
+        "maxSaturation": 1,
+        "offspring": 4
+      }
+    },
+    {
+      "animalName": "horse",
+      "parameters": {
+        "weight": 400,
+        "maxCellPopulation": 20,
+        "speed": 4,
+        "maxSaturation": 60,
+        "offspring": 2
+      }
+    },
+    {
+      "animalName": "deer",
+      "parameters": {
+        "weight": 300,
+        "maxCellPopulation": 20,
+        "speed": 4,
+        "maxSaturation": 50,
+        "offspring": 2
+      }
+    },
+    {
+      "animalName": "rabbit",
+      "parameters": {
+        "weight": 2,
+        "maxCellPopulation": 150,
+        "speed": 2,
+        "maxSaturation": 0.45,
+        "offspring": 5
+      }
+    },
+    {
+      "animalName": "mouse",
+      "parameters": {
+        "weight": 0.05,
+        "maxCellPopulation": 500,
+        "speed": 1,
+        "maxSaturation": 0.01,
+        "offspring": 14
+      }
+    },
+    {
+      "animalName": "goat",
+      "parameters": {
+        "weight": 60,
+        "maxCellPopulation": 140,
+        "speed": 3,
+        "maxSaturation": 10,
+        "offspring": 5
+      }
+    },
+    {
+      "animalName": "sheep",
+      "parameters": {
+        "weight": 70,
+        "maxCellPopulation": 140,
+        "speed": 3,
+        "maxSaturation": 15,
+        "offspring": 5
+      }
+    },
+    {
+      "animalName": "boar",
+      "parameters": {
+        "weight": 400,
+        "maxCellPopulation": 50,
+        "speed": 2,
+        "maxSaturation": 50,
+        "offspring": 12
+      }
+    },
+    {
+      "animalName": "buffalo",
+      "parameters": {
+        "weight": 700,
+        "maxCellPopulation": 10,
+        "speed": 3,
+        "maxSaturation": 100,
+        "offspring": 2
+      }
+    },
+    {
+      "animalName": "duck",
+      "parameters": {
+        "weight": 1,
+        "maxCellPopulation": 200,
+        "speed": 4,
+        "maxSaturation": 0.15,
+        "offspring": 25
+      }
+    },
+    {
+      "animalName": "caterpillar",
+      "parameters": {
+        "weight": 0.01,
+        "maxCellPopulation": 1000,
+        "speed": 0,
+        "maxSaturation": 0,
+        "offspring": 120
+      }
+    },
+    {
+      "animalName": "plants",
+      "parameters": {
+        "weight": 1,
+        "maxCellPopulation": 200,
+        "speed": 0,
+        "maxSaturation": 0,
+        "offspring": 0.5
+      }
+    }
+  ]
+}

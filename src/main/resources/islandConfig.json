@@ -1,0 +1,9 @@
+{
+  "islandHeight": 100,
+  "islandWidth": 20,
+  "daysOfSimulation": 50,
+  "daysForAnimalDecomposition": 1,
+  "dailyAnimalConsumptionCoefficient": 0.3,
+  "startupSaturationCoefficient": 0.5,
+  "startupAnimalGenerationOnCell": 10
+}
