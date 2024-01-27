@@ -17,7 +17,7 @@ public class Cell {
         this.island = island;
     }
 
-    public synchronized List<Eatable> getEatbleList() {
+    public synchronized List<Eatable> getEatableList() {
         return eatbleList;
     }
 
@@ -29,7 +29,7 @@ public class Cell {
         return yCoordinate;
     }
 
-    public void setEatbleList(List<Eatable> eatbleList) {
+    public void setEatableList(List<Eatable> eatbleList) {
         this.eatbleList = eatbleList;
     }
 
