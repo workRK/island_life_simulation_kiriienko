@@ -3,6 +3,8 @@ package com.javarush.kiriienko.entity.plants;
 import com.javarush.kiriienko.abstraction.Eatable;
 import com.javarush.kiriienko.entity.map.Cell;
 
+import static com.javarush.kiriienko.config.GameConfig.ANIMAL_CONFIG;
+
 public class Plants implements Eatable, Runnable {
 
     private final double maxCellCapacity;
