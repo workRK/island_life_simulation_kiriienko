@@ -20,7 +20,6 @@ public class GameConfig {
     private static EatingProbabilityConfig initEatingProbablitiesConfig() {
         try {
             URL resource = GameConfig.class.getResource(EATING_PROBABILITIES_CONFIG_FILE_PATH);
-            assert resource != null;
             File file = Paths.get(resource.toURI()).toFile();
             JsonMapper jsonMapper = new JsonMapper();
             return jsonMapper.readValue(file, EatingProbabilityConfig.class);
@@ -28,11 +27,9 @@ public class GameConfig {
             throw new RuntimeException(e);
         }
     }
-
     private static AnimalConfig initAnimalConfig() {
         try {
             URL resource = GameConfig.class.getResource(ANIMAL_CONFIG_FILE_PATH);
-            assert resource != null;
             File file = Paths.get(resource.toURI()).toFile();
             JsonMapper jsonMapper = new JsonMapper();
             return jsonMapper.readValue(file, AnimalConfig.class);
@@ -40,11 +37,9 @@ public class GameConfig {
             throw new RuntimeException(e);
         }
     }
-
     private static IslandConfig initIslandConfig() {
         try {
             URL resource = GameConfig.class.getResource(ISLAND_CONFIG_FILE_PATH);
-            assert resource != null;
             File file = Paths.get(resource.toURI()).toFile();
             JsonMapper jsonMapper = new JsonMapper();
             return jsonMapper.readValue(file, IslandConfig.class);
@@ -56,7 +51,6 @@ public class GameConfig {
     private static <C> C initConfig(Class<C> clazz, String pathtoFile) {
         try {
             URL resource = clazz.getResource(pathtoFile);
-            assert resource != null;
             File file = Paths.get(resource.toURI()).toFile();
             JsonMapper jsonMapper = new JsonMapper();
             return jsonMapper.readValue(file, clazz);

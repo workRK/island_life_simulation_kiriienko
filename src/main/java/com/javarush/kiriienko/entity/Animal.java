@@ -27,8 +27,9 @@ public abstract class Animal implements Eatable, Runnable {
     private final Gender gender;
     int daysBeforeDecay;
 
+
     public Animal(double weight, int maxCellPopulation, int speed, double maxSaturation, Cell cell,
-                  int offspring, Gender gender, double saturation, int daysBeforeDecay) {
+                  int offspring, Gender gender, double saturation, int daysBeforeDecay){
         this.weight = weight;
         this.maxCellPopulation = maxCellPopulation;
         this.speed = speed;
@@ -45,32 +46,29 @@ public abstract class Animal implements Eatable, Runnable {
         live();
     }
 
-    public void live() {
+    public void live(){
         move();
         eat();
         reproduce();
+        //decide to die
     }
 
-    private void move() {
-        if (saturation == maxSaturation || speed == 0) {
+
+    private void move(){
+        if (saturation == maxSaturation || speed == 0){
             return;
         }
-
         Cell destinationCell = findFood();
-
-        if (cell == destinationCell) {
+        if (cell == destinationCell){
             return;
         }
-
-        if (speed == 0) {
+        if (speed == 0){
             return;
         }
+        cell.getEatableList().remove(this);
+        while (cell != destinationCell && speed > 0){
 
-        cell.getEatbleList().remove(this);
-
-        while (cell != destinationCell && speed > 0) {
-
-            if (cell.getxCoordinate() == destinationCell.getxCoordinate()) {
+            if (cell.getxCoordinate() == destinationCell.getxCoordinate()){
                 moveYAxis(destinationCell);
             } else if (cell.getyCoordinate() == destinationCell.getyCoordinate()) {
                 moveXAxis(destinationCell);
@@ -80,20 +78,19 @@ public abstract class Animal implements Eatable, Runnable {
             }
             speed--;
         }
-        cell.getEatbleList().add(this);
+        cell.getEatableList().add(this);
     }
-
-    private void eat() {
-        if (saturation == maxSaturation) {
+    private void eat(){
+        if (saturation == maxSaturation){
             return;
         }
         Eatable food;
         List<Eatable> eatables = findDiet(cell);
-        if (eatables.size() == 0) {
+        if (eatables.size() == 0){
             return;
         } else {
             while (eatables.stream().filter(eatable -> eatable.satiate() > 0).toList().size() > 0 &&
-                    saturation < maxSaturation) {
+                    saturation < maxSaturation){
                 food = eatables.stream().findAny().get();
                 double consumed = consume(food);
                 eatables.remove(food);
@@ -104,33 +101,33 @@ public abstract class Animal implements Eatable, Runnable {
 
     }
 
-    private void reproduce() {
-        if (gender == Gender.FEMALE && saturation == maxSaturation) {
-            List<Animal> population = cell.getEatbleList().stream()
+    private void reproduce(){
+        if (gender == Gender.FEMALE && saturation == maxSaturation){
+            List<Animal> population = cell.getEatableList().stream()
                     .filter(eatable -> eatable instanceof Animal)
                     .map(Animal.class::cast)
                     .filter(animal -> !animal.isDead)
                     .filter(animal -> animal.getAnimalType() == this.getAnimalType())
                     .toList();
-            if (population.size() < maxCellPopulation) {
+            if (population.size() < maxCellPopulation){
                 Animal partner = population.stream()
                         .filter(animal -> animal.getAnimalType() == this.getAnimalType())
                         .filter(animal -> animal.getGender() != this.gender)
                         .findFirst()
                         .orElse(null);
-                if (partner != null) {
+                if (partner != null){
                     Random random = new Random();
                     for (int i = 0; i < random.nextInt(offspring); i++) {
-                        cell.getEatbleList().add(AnimalFactory.createAnimalByType(cell, getAnimalType()));
+                        cell.getEatableList().add(AnimalFactory.createAnimalByType(cell, getAnimalType()));
                     }
                 }
             }
+
         }
     }
-
     private Cell findFood() {
         Cell destinationCell = cell;
-        if (findDiet(destinationCell).size() == 0) {
+        if (findDiet(destinationCell).size() == 0){
             int xCoordinate = cell.getxCoordinate();
             int yCoordinate = cell.getyCoordinate();
             Cell[][] islandMap = cell.getIsland().getIslandMap();
@@ -141,17 +138,17 @@ public abstract class Animal implements Eatable, Runnable {
             }
             List<Cell> cellsWithFood = new ArrayList<>();
             for (Cell currentCell : allCellsList) {
-                List<Eatable> eatables = findDiet(currentCell);
-                if (eatables.size() > 0) {
+                List<Eatable> eatables =  findDiet(currentCell);
+                if (eatables.size() > 0){
                     cellsWithFood.add(currentCell);
                 }
             }
-            if (cellsWithFood.size() > 0) {
+            if (cellsWithFood.size() > 0){
                 int distance = Integer.MAX_VALUE;
                 for (Cell currentCell : cellsWithFood) {
                     int distToCurrentCell = Math.abs(currentCell.getxCoordinate() - xCoordinate) +
                             Math.abs(currentCell.getyCoordinate() - yCoordinate);
-                    if (distToCurrentCell < distance) {
+                    if (distToCurrentCell < distance){
                         distance = distToCurrentCell;
                         destinationCell = currentCell;
                     }
@@ -160,12 +157,11 @@ public abstract class Animal implements Eatable, Runnable {
         }
         return destinationCell;
     }
-
-    protected List<Eatable> findDiet(Cell currentCell) {
+    protected List<Eatable> findDiet(Cell currentCell){ //push to Predator/Herbivore classes, and make it abstract here
         List<Eatable> diet;
-        List<Eatable> eatables = List.copyOf(currentCell.getEatbleList());
+        List<Eatable> eatables = List.copyOf(currentCell.getEatableList());
 
-        if (AnimalType.getPredatorsType().contains(this.getAnimalType())) {
+        if (AnimalType.getPredatorsType().contains(this.getAnimalType())){
             diet = eatables.stream()
                     .filter(eatable -> eatable instanceof Animal)
                     .filter(eatable -> eatable.satiate() > 0)
@@ -178,30 +174,27 @@ public abstract class Animal implements Eatable, Runnable {
         }
         return diet;
     }
-
-    private void moveYAxis(Cell destinationCell) {
-        if (cell.getyCoordinate() > destinationCell.getyCoordinate()) {
+    private void moveYAxis(Cell destinationCell){
+        if (cell.getyCoordinate() > destinationCell.getyCoordinate()){
             cell = cell.getIsland().getIslandMap()[cell.getxCoordinate()][cell.getyCoordinate() - 1];
         } else {
             cell = cell.getIsland().getIslandMap()[cell.getxCoordinate()][cell.getyCoordinate() + 1];
         }
     }
-
-    private void moveXAxis(Cell destinationCell) {
-        if (cell.getxCoordinate() > destinationCell.getxCoordinate()) {
+    private void moveXAxis(Cell destinationCell){
+        if (cell.getxCoordinate() > destinationCell.getxCoordinate()){
             cell = cell.getIsland().getIslandMap()[cell.getxCoordinate() - 1][cell.getyCoordinate()];
         } else {
             cell = cell.getIsland().getIslandMap()[cell.getxCoordinate() + 1][cell.getyCoordinate()];
         }
     }
-
-    private double consume(Eatable food) {
+    private double consume(Eatable food){
         double readyToConsume = maxSaturation - saturation;
         double availableSatuation = food.satiate();
-        if (food.satiate() <= 0) {
+        if (food.satiate() <= 0){
             return 0.0;
         }
-        if (readyToConsume >= availableSatuation) {
+        if (readyToConsume >= availableSatuation){
             saturation = saturation + availableSatuation;
             return availableSatuation;
         } else {
@@ -209,11 +202,9 @@ public abstract class Animal implements Eatable, Runnable {
             return readyToConsume;
         }
     }
-
-    public void die() {
+    public void die(){
         isDead = true;
     }
-
     @Override
     public synchronized double satiate() {
         return weight;
@@ -228,7 +219,6 @@ public abstract class Animal implements Eatable, Runnable {
     public double getWeight() {
         return weight;
     }
-
     public void setWeight(double weight) {
         this.weight = weight;
     }
@@ -236,15 +226,12 @@ public abstract class Animal implements Eatable, Runnable {
     public int getMaxCellPopulation() {
         return maxCellPopulation;
     }
-
     public boolean isDead() {
         return isDead;
     }
-
-    public AnimalType getAnimalType() {
+    public AnimalType getAnimalType(){
         return null;
     }
-
     public Gender getGender() {
         return gender;
     }
@@ -260,7 +247,6 @@ public abstract class Animal implements Eatable, Runnable {
     public double getMaxSaturation() {
         return maxSaturation;
     }
-
     public int getDaysBeforeDecay() {
         return daysBeforeDecay;
     }

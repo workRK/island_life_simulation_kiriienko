@@ -4,7 +4,7 @@ public class IslandConfig {
 
     private int islandHeight;
     private int islandWidth;
-    private int dayOfSimulation;
+    private int daysOfSimulation;
     private int daysForAnimalDecomposition;
     private double dailyAnimalConsumptionCoefficient;
     private double startupSaturationCoefficient;
@@ -26,12 +26,12 @@ public class IslandConfig {
         this.islandWidth = islandWidth;
     }
 
-    public int getDayOfSimulation() {
-        return dayOfSimulation;
+    public int getDaysOfSimulation() {
+        return daysOfSimulation;
     }
 
-    public void setDayOfSimulation(int dayOfSimulation) {
-        this.dayOfSimulation = dayOfSimulation;
+    public void setDaysOfSimulation(int daysOfSimulation) {
+        this.daysOfSimulation = daysOfSimulation;
     }
 
     public int getDaysForAnimalDecomposition() {
